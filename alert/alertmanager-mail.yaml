@@ -1,0 +1,25 @@
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: alertmanager
+  namespace: kube-system
+data:
+  alertmanager.yml: |-
+    global:
+      smtp_smarthost: 'smtp.163.com:25'                                               ###邮箱服务端
+      smtp_from: 'ecnu_server@163.com'                                                                ###发件人邮箱
+      smtp_auth_username: 'ecnu_server@163.com'                                           ###发件人邮箱认证
+      smtp_auth_password: '2019ecnu'                                      
+      smtp_require_tls: false
+    route:
+      group_by: []                                                              ###自定义
+      group_wait: 30s
+      group_interval: 5m
+      repeat_interval: 10m
+      receiver: 'default-receiver'                                                                ###自定义接收名称
+    receivers:
+    - name: 'default-receiver                                                                     ###需与receiver的值对应
+      email_configs:
+      - to: '527028589@qq.com'                                                                  ###收件人邮箱
+
